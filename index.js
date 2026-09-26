@@ -17,19 +17,16 @@ storage.pull().then((Todos) => {
     view.render(model.get());
 });
 
-btnNode.addEventListener('click', function() {
+btnNode.addEventListener('click', async function() {
     const todo = {
-        title: inputNode.value,
-        status: 'active'
+        title: inputNode.value
     };
+
+    await storage.push(todo);
 
     model.add(todo);
 
     view.addTodo(todo);
-
-    storage.push(todo);
-
-    // inputNode.innerHTML = '';
 });
 
 btnClearNode.addEventListener('click', function() {

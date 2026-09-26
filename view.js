@@ -4,6 +4,8 @@ export function createView(selector, onClickTodo) {
     return {
         node,
         render: function(Todos) {
+            this.node.innerHTML = '';
+            
             Todos.forEach((todo) => {
                 this.addTodo(todo);
             })
