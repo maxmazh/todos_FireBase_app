@@ -1,4 +1,4 @@
-export function createView(selector) {
+export function createView(selector, onClickTodo) {
     const node = document.querySelector(selector);
 
     return {
@@ -15,6 +15,10 @@ export function createView(selector) {
 
             input.setAttribute('type', 'checkbox');
             input.setAttribute('id', todo.id);
+
+            input.onclick = () => {
+                onClickTodo(todo.id);
+            }
 
             if (todo.done) {
                 input.setAttribute('checked', true);

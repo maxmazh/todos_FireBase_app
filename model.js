@@ -12,6 +12,26 @@ export function createTodosModel(Todos) {
         },
         clear: function() {
             this.Todos = [];
+        },
+        toggleTodo: function(id) {
+            this.get().forEach(todo => {
+                if (id !== todo.id) {
+                    return;
+                }
+                todo.done = !todo.done;
+
+                console.log(todo);
+            });
+        },
+        getTodo: function(id) {
+            let result = null;
+
+            this.get().forEach(todo => {
+                if (id === todo.id) {
+                    result = todo;
+                }
+            })
+            return result;
         }
     };
 }

@@ -9,7 +9,7 @@ const btnClearNode = document.querySelector('.js_clear_btn');
 
 const initialTodos = [];
 const model = createTodosModel(initialTodos);
-const view = createView('.js_output');
+const view = createView('.js_output', handleClickTodo);
 const storage = createStorage(TODOS_STORAGE_KEY);
 
 storage.pull().then((Todos) => {
@@ -39,3 +39,9 @@ btnClearNode.addEventListener('click', function() {
 
     view.render(model.get());
 })
+
+function handleClickTodo(id) {
+    console.log(id);
+    model.toggleTodo(id);
+    storage.update(model.getTodo(id));
+}

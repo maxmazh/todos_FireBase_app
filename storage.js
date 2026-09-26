@@ -9,7 +9,7 @@ import {
     serverTimestamp,
     query,
     orderBy,
-    limit
+    updateDoc
 } from "firebase/firestore"; 
 
 const firebaseConfig = {
@@ -38,7 +38,8 @@ export function createStorage(key) {
             querySnapshot.forEach((doc) => {
                 Todos.push({
                     id: doc.id,
-                    title: doc.data().title
+                    title: doc.data().title,
+                    done: doc.data().done
                 });
             });
             return Todos;
@@ -69,6 +70,13 @@ export function createStorage(key) {
             console.log("удаление прошло успешно");
 
             await batch.commit();
+        },
+        update: async function (todo) {
+            const ref = doc(this.db, this.key, todo.id);
+
+            await updateDoc(ref, {
+                done: todo.done
+            });
         }
     }
 }
